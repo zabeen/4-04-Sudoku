@@ -1,65 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Sudoku.GameLogic
 {
-    public class Board
+    public interface IBoard
     {
-        public int[,] CurrentGame => SetupBoard();
+        Block[,] CurrentGame { get; set; }
+        void WriteBoard();
+    }
+
+    public class Board : IBoard
+    {
+        public Block[,] CurrentGame { get; set; }
+        private const int BlocksPerRow = 3;
+        private const int SquaresPerRow = 9;
+
+        public Board()
+        {
+            CurrentGame = SetupBoard();
+        }
 
         public void WriteBoard()
         {
             Console.Clear();
 
-            for (var i = 0; i < 9; i++)
+            for (var blockRow = 0; blockRow < BlocksPerRow; blockRow++)
             {
-                var seperator = new StringBuilder();
-                for (var j = 0; j < 9; j++)
+                for (var squareRow = 0; squareRow < BlocksPerRow; squareRow++)
                 {
-                    var value = CurrentGame[i, j].ToString().Replace("0", " ");
-                    Console.Write($"| {value} ");
-                    seperator.Append("----");
+                    var rowValues = new List<int>();
+                    for (var blockCol = 0; blockCol < BlocksPerRow; blockCol++)
+                    {
+                        rowValues.AddRange(CurrentGame[blockRow, blockCol].GetValuesInRow(squareRow));
+                    }
+
+                    Console.WriteLine($"{string.Join("|", rowValues)}|");
                 }
-                Console.WriteLine("|");
-                Console.WriteLine(seperator);
             }
         }
 
-        private int[,] SetupBoard()
+        private static Block[,] SetupBoard()
         {
-            var board = new int[9, 9];
+            var board = new Block[BlocksPerRow, BlocksPerRow];
 
-            board[0, 5] = 2;
-            board[0, 6] = 1;
-
-            board[1, 2] = 4;
-            board[1, 5] = 8;
-            board[1, 6] = 7;
-
-            board[2, 1] = 2;
-            board[2, 3] = 3;
-            board[2, 6] = 9;
-
-            board[3, 0] = 6;
-            board[3, 2] = 2;
-            board[3, 5] = 3;
-            board[3, 7] = 4;
-
-            board[5, 1] = 5;
-            board[5, 3] = 6;
-            board[5, 6] = 3;
-            board[5, 8] = 1;
-
-            board[6, 2] = 3;
-            board[6, 5] = 5;
-            board[6, 7] = 8;
-
-            board[7, 2] = 8;
-            board[7, 3] = 2;
-            board[7, 6] = 5;
-
-            board[8, 2] = 9;
-            board[8, 3] = 7;
+            board[0, 0] = new Block(new[,] { { 0, 0, 0 }, { 0, 0, 4 }, { 0, 2, 0 } });
+            board[0, 1] = new Block(new[,] { { 0, 0, 2 }, { 0, 0, 8 }, { 3, 0, 0 } });
+            board[0, 2] = new Block(new[,] { { 1, 0, 0 }, { 7, 0, 0 }, { 9, 0, 0 } });
+            board[1, 0] = new Block(new[,] { { 6, 0, 2 }, { 0, 0, 0 }, { 0, 5, 0 } });
+            board[1, 1] = new Block(new[,] { { 0, 0, 3 }, { 0, 0, 0 }, { 6, 0, 0 } });
+            board[1, 2] = new Block(new[,] { { 0, 4, 0 }, { 0, 0, 0 }, { 3, 0, 1 } });
+            board[2, 0] = new Block(new[,] { { 0, 0, 3 }, { 0, 0, 8 }, { 0, 0, 9 } });
+            board[2, 1] = new Block(new[,] { { 0, 0, 5 }, { 2, 0, 0 }, { 7, 0, 0 } });
+            board[2, 2] = new Block(new[,] { { 0, 8, 0 }, { 5, 0, 0 }, { 0, 0, 0 } });
 
             return board;
         }

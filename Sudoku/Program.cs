@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sudoku.GameLogic;
+﻿using Sudoku.GameLogic;
+using System;
 
 namespace Sudoku
 {
@@ -13,6 +9,9 @@ namespace Sudoku
         {
             var board = new Board();
             board.WriteBoard();
+
+            var game = new Game(board);
+
             Console.ReadLine();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,20 @@ namespace Sudoku.GameLogic
         {
             public Coordinates Block { get; }
             public Coordinates Square { get; }
+            public Node Next => NextNode();
 
             public Node(Coordinates block, Coordinates square)
             {
                 Block = block;
                 Square = square;
+            }
+
+            public Node NextNode()
+            {
+                var square = Square.Next();
+                var block = square.Equals(new Coordinates(0, 0)) ? Block.Next() : Block;
+
+                return new Node(block, square);
             }
         }
 
@@ -54,13 +64,7 @@ namespace Sudoku.GameLogic
             {
                 _workingCopy.GetBlock(current.Block).SetSquareValue(current.Square, val);
 
-                var square = current.Square.Next();
-                var block = square.Equals(new Coordinates(0, 0)) ?
-                    current.Block.Next() :
-                    current.Block;
-                var next = new Node(block, square);
-
-                if (FindValues(next, counter + 1))
+                if (FindValues(current.Next, counter + 1))
                     return true;
             }
 

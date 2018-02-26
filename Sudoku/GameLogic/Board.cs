@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace Sudoku.GameLogic
 {
-    public interface ISudokuBoard
+    public interface IBoard
     {
         int BlocksPerSide { get; }
         Block GetBlock(Coordinates blockCoordinates);
         void WriteBoard();
         bool CheckValueExistsInBoardRow(int blockRow, int squareRow, int value);
         bool CheckValueExistsInBoardColumn(int blockCol, int squareCol, int value);
-        ISudokuBoard CopyBoard();
+        IBoard CopyBoard();
     }
 
-    public class SudokuBoard : ISudokuBoard
+    public class Board : IBoard
     {
         public int BlocksPerSide { get; } = 3;
         private Block[,] _board;  
     
-        public SudokuBoard()
+        public Board()
         {
             _board = SetupBoard();
         }
@@ -75,9 +75,9 @@ namespace Sudoku.GameLogic
             }
         }
 
-        public ISudokuBoard CopyBoard()
+        public IBoard CopyBoard()
         {
-            var board = new SudokuBoard();
+            var board = new Board();
             board.SetupBoard();
             return board;
         }

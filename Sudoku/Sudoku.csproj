@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="GameLogic\Block.cs" />
     <Compile Include="GameLogic\Coordinates.cs" />
-    <Compile Include="GameLogic\SudokuBoard.cs" />
+    <Compile Include="GameLogic\Board.cs" />
     <Compile Include="GameLogic\Solution.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -21,13 +21,13 @@ namespace Sudoku.GameLogic
             }
         }
 
-        private readonly ISudokuBoard _referenceCopy;
-        private readonly ISudokuBoard _workingCopy;
+        private readonly IBoard _referenceCopy;
+        private readonly IBoard _workingCopy;
         private const int SquaresTotal = 81;
         private const int MinValue = 1;
         private const int MaxValue = 9;
 
-        public Solution(ISudokuBoard board)
+        public Solution(IBoard board)
         {
             _workingCopy = board;
             _referenceCopy = board.CopyBoard();
@@ -35,10 +35,10 @@ namespace Sudoku.GameLogic
 
         public void SolveBoard()
         {
-            var blockCoordinates = new Coordinates(0, 0);
-            var squareCoordinates = new Coordinates(0, 0);
+            var startingBlock = new Coordinates(0, 0);
+            var startingSquare = new Coordinates(0, 0);
 
-            FindValues(new Node(blockCoordinates, squareCoordinates));
+            FindValues(new Node(startingBlock, startingSquare));
         }
 
         private bool FindValues(Node current, int counter = 0)

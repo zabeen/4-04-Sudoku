@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Sudoku.GameLogic;
+using System.Linq;
 
 namespace Sudoku.Tests
 {
     [TestFixture]
     public class SolutionTest
     {
-        private readonly ISudokuBoard _board;
+        private readonly IBoard _board;
 
         public SolutionTest()
         {
-            _board = new SudokuBoard();
+            _board = new Board();
             var solution = new Solution(_board);
             solution.SolveBoard();
         }

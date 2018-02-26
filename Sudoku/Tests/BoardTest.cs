@@ -6,11 +6,11 @@ namespace Sudoku.Tests
     [TestFixture]
     public class BoardTest
     {
-        private ISudokuBoard _board;
+        private IBoard _board;
 
         public BoardTest()
         {
-            _board = new SudokuBoard();
+            _board = new Board();
         }
 
         [Test]

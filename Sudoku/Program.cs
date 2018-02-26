@@ -7,7 +7,7 @@ namespace Sudoku
     {
         static void Main(string[] args)
         {
-            var board = new SudokuBoard();
+            var board = new Board();
             var solution = new Solution(board);
             solution.SolveBoard();
 

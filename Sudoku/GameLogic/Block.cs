@@ -15,21 +15,18 @@ namespace Sudoku.GameLogic
             _block = values;
         }
 
-        public bool TrySquareValue(int row, int col, int value)
+        public bool CheckValueExistsInBlock(int value)
         {
-            if (value <= 0 || value > _block.Length)
-                return false;
-
             for (var i = 0; i < _block.GetLength(0); i++)
             {
                 for (var j = 0; j < _block.GetLength(1); j++)
                 {
                     if (_block[i, j].Equals(value))
-                        return false;
+                        return true;
                 }
             }
 
-            return true;
+            return false;
         }
 
         public void SetSquareValue(int row, int col, int value)

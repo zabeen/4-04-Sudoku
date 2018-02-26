@@ -50,6 +50,7 @@
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\BlockTests.cs" />
     <Compile Include="Tests\BoardTests.cs" />
   </ItemGroup>
   <ItemGroup>

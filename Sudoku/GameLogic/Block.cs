@@ -25,17 +25,22 @@ namespace Sudoku.GameLogic
             return false;
         }
 
-        public void SetSquareValue(int row, int col, int value)
+        public int GetSquareValue(Coordinates square)
         {
-            _block[row, col] = value;
+            return _block[square.Row, square.Column];
+        }
+
+        public void SetSquareValue(Coordinates square, int value)
+        {
+            _block[square.Row, square.Column] = value;
         }
 
         public IEnumerable<int> GetValuesInRow(int row)
         {
-            var values = new int[_block.GetLength(1)];
-            for (var i = 0; i < values.Length; i++)
+            var values = new List<int>();
+            for (var i = 0; i < _block.GetLength(1); i++)
             {
-                values[i] = _block[row, i];
+                values.Add(_block[row, i]);
             }
 
             return values;
@@ -43,10 +48,24 @@ namespace Sudoku.GameLogic
 
         public IEnumerable<int> GetValuesInColumn(int col)
         {
-            var values = new int[_block.GetLength(0)];
-            for (var i = 0; i < values.Length; i++)
+            var values = new List<int>();
+            for (var i = 0; i < _block.GetLength(0); i++)
             {
-                values[i] = _block[i, col];
+                values.Add(_block[i, col]);
+            }
+
+            return values;
+        }
+
+        public IEnumerable<int> GetValuesInBlock()
+        {
+            var values = new List<int>();
+            for (var i = 0; i < _block.GetLength(0); i++)
+            {
+                for (var j = 0; j < _block.GetLength(1); j++)
+                {
+                    values.Add(_block[i,j]);
+                }
             }
 
             return values;

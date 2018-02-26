@@ -5,20 +5,27 @@ namespace Sudoku.GameLogic
 {
     public interface ISudokuBoard
     {
-        Block[,] Board { get; set; }
+        int BlocksPerSide { get; }
+        Block GetBlock(Coordinates blockCoordinates);
         void WriteBoard();
         bool CheckValueExistsInBoardRow(int blockRow, int squareRow, int value);
         bool CheckValueExistsInBoardColumn(int blockCol, int squareCol, int value);
+        ISudokuBoard CopyBoard();
     }
 
     public class SudokuBoard : ISudokuBoard
     {
-        public Block[,] Board { get; set; }
-        private const int BlocksPerSide = 3;
-
+        public int BlocksPerSide { get; } = 3;
+        private Block[,] _board;  
+    
         public SudokuBoard()
         {
-            Board = SetupBoard();
+            _board = SetupBoard();
+        }
+
+        public Block GetBlock(Coordinates blockCoordinates)
+        {
+            return _board[blockCoordinates.Row, blockCoordinates.Column];
         }
 
         public bool CheckValueExistsInBoardRow(int blockRow, int squareRow, int value)
@@ -60,7 +67,7 @@ namespace Sudoku.GameLogic
                     var rowValues = new List<int>();
                     for (var blockCol = 0; blockCol < BlocksPerSide; blockCol++)
                     {
-                        rowValues.AddRange(Board[blockRow, blockCol].GetValuesInRow(squareRow));
+                        rowValues.AddRange(_board[blockRow, blockCol].GetValuesInRow(squareRow));
                     }
 
                     Console.WriteLine($"{string.Join("|", rowValues)}|");
@@ -68,12 +75,19 @@ namespace Sudoku.GameLogic
             }
         }
 
+        public ISudokuBoard CopyBoard()
+        {
+            var board = new SudokuBoard();
+            board.SetupBoard();
+            return board;
+        }
+
         private IEnumerable<Block> GetBlocksByRow(int blockRow)
         {
             var blocks = new List<Block>();
             for (var i = 0; i < BlocksPerSide; i++)
             {
-                blocks.Add(Board[blockRow, i]);
+                blocks.Add(_board[blockRow, i]);
             }
 
             return blocks;
@@ -84,13 +98,13 @@ namespace Sudoku.GameLogic
             var blocks = new List<Block>();
             for (var i = 0; i < BlocksPerSide; i++)
             {
-                blocks.Add(Board[i, blockCol]);
+                blocks.Add(_board[i, blockCol]);
             }
 
             return blocks;
         }
 
-        private static Block[,] SetupBoard()
+        private Block[,] SetupBoard()
         {
             var board = new Block[BlocksPerSide, BlocksPerSide];
 

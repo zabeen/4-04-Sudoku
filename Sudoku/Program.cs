@@ -8,9 +8,10 @@ namespace Sudoku
         static void Main(string[] args)
         {
             var board = new SudokuBoard();
-            board.WriteBoard();
+            var solution = new Solution(board);
+            solution.SolveBoard();
 
-            var game = new Solution(board);
+            board.WriteBoard();
 
             Console.ReadLine();
         }

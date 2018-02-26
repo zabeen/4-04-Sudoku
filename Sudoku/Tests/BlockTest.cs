@@ -18,19 +18,19 @@ namespace Sudoku.Tests
         [Test]
         public void SquareCheckReturnsTrueWhenValueExists()
         {
-            Assert.IsTrue(_block.CheckValueExistsInBlock(2));
+            Assert.IsTrue(_block.Values.Contains(2));
         }
 
         [Test]
         public void SquareCheckReturnsFalseWhenValueDoesNotExist()
         {
-            Assert.IsFalse(_block.CheckValueExistsInBlock(9));
+            Assert.IsFalse(_block.Values.Contains(9));
         }
 
         [Test]
         public void CorrectValuesReturnedForBlock()
         {
-            var values = _block.GetValuesInBlock();
+            var values = _block.Values;
             Assert.IsTrue(values.Distinct().OrderBy(v => v).SequenceEqual(new List<int> { 0, 2, 4 }));
         }
     }

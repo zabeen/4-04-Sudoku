@@ -75,7 +75,7 @@ namespace Sudoku.GameLogic
             var possible = new List<int>();
             for (var i = MinValue; i <= MaxValue; i++)
             {
-                var inBlock = _workingCopy.GetBlock(node.Block).CheckValueExistsInBlock(i);
+                var inBlock = _workingCopy.GetBlock(node.Block).Values.Contains(i);
                 var inRow = _workingCopy.CheckValueExistsInBoardRow(node.Block.Row, node.Square.Row, i);
                 var inColumn = _workingCopy.CheckValueExistsInBoardColumn(node.Block.Column, node.Square.Column, i);
                 if (inBlock || inRow || inColumn)

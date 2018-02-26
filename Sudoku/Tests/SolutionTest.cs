@@ -24,7 +24,7 @@ namespace Sudoku.Tests
             {
                 for (var col = 0; col < 3; col++)
                 {
-                    var blockValues = _board.GetBlock(new Coordinates(row,col)).GetValuesInBlock();
+                    var blockValues = _board.GetBlock(new Coordinates(row, col)).Values;
                     Assert.IsFalse(blockValues.GroupBy(v => v).Any(g => g.Count() > 1));
                 }
             }

@@ -8,18 +8,18 @@ namespace Sudoku.GameLogic
 {
     public class Game
     {
-        private IBoard _board;
+        private IGameBoard _board;
 
-        public Game(IBoard board)
+        public Game(IGameBoard board)
         {
             _board = board;
         }
 
         public void PlayGame()
         {
-            for (var i = 0; i < _board.CurrentGame.Length; i++)
+            for (var i = 0; i < _board.Board.Length; i++)
             {
-                for (int j = 0; j < _board.CurrentGame.Length; j++)
+                for (int j = 0; j < _board.Board.Length; j++)
                 {
                     CalculateSquare(i, j);
                     _board.WriteBoard();

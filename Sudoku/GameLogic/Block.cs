@@ -48,7 +48,7 @@ namespace Sudoku.GameLogic
             return values;
         }
 
-        public IEnumerable<int> GetValuesInCol(int col)
+        public IEnumerable<int> GetValuesInColumn(int col)
         {
             var values = new int[_block.GetLength(0)];
             for (var i = 0; i < values.Length; i++)

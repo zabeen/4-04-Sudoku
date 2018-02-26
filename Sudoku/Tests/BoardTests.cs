@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Sudoku.GameLogic;
 
 namespace Sudoku.Tests
@@ -11,11 +6,11 @@ namespace Sudoku.Tests
     [TestFixture]
     public class BoardTests
     {
-        private IGameBoard _board;
+        private ISudokuBoard _board;
 
         public BoardTests()
         {
-            _board = new GameBoard();
+            _board = new SudokuBoard();
         }
 
         [Test]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sudoku.GameLogic
 {
-    public interface IGameBoard
+    public interface ISudokuBoard
     {
         Block[,] Board { get; set; }
         void WriteBoard();
@@ -11,12 +11,12 @@ namespace Sudoku.GameLogic
         bool CheckValueExistsInBoardColumn(int blockCol, int squareCol, int value);
     }
 
-    public class GameBoard : IGameBoard
+    public class SudokuBoard : ISudokuBoard
     {
         public Block[,] Board { get; set; }
         private const int BlocksPerSide = 3;
 
-        public GameBoard()
+        public SudokuBoard()
         {
             Board = SetupBoard();
         }

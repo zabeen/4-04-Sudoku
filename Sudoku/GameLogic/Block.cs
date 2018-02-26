@@ -6,7 +6,7 @@ namespace Sudoku.GameLogic
     {
         public IEnumerable<int> Values => GetValuesInBlock();
 
-        private int[,] _block;
+        private readonly int[,] _block;
 
         public Block(int[,] values)
         {

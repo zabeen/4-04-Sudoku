@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Sudoku.GameLogic
@@ -8,8 +8,8 @@ namespace Sudoku.GameLogic
         int BlocksPerSide { get; }
         Block GetBlock(Coordinates blockCoordinates);
         void WriteBoard();
-        bool CheckValueExistsInBoardRow(int blockRow, int squareRow, int value);
-        bool CheckValueExistsInBoardColumn(int blockCol, int squareCol, int value);
+        bool BoardRowContains(int blockRow, int squareRow, int value);
+        bool BoardColumnContains(int blockCol, int squareCol, int value);
         IBoard CopyBoard();
     }
 
@@ -28,7 +28,7 @@ namespace Sudoku.GameLogic
             return _board[blockCoordinates.Row, blockCoordinates.Column];
         }
 
-        public bool CheckValueExistsInBoardRow(int blockRow, int squareRow, int value)
+        public bool BoardRowContains(int blockRow, int squareRow, int value)
         {
             foreach (var block in GetBlocksByRow(blockRow))
             {
@@ -42,7 +42,7 @@ namespace Sudoku.GameLogic
             return false;
         }
 
-        public bool CheckValueExistsInBoardColumn(int blockCol, int squareCol, int value)
+        public bool BoardColumnContains(int blockCol, int squareCol, int value)
         {
             foreach (var block in GetBlocksByColumn(blockCol))
             {

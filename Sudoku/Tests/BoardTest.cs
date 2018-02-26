@@ -16,25 +16,25 @@ namespace Sudoku.Tests
         [Test]
         public void RowCheckReturnsTrueWhenValueExists()
         {
-            Assert.IsTrue(_board.CheckValueExistsInBoardRow(2, 0, 5));
+            Assert.IsTrue(_board.BoardRowContains(2, 0, 5));
         }
 
         [Test]
         public void RowCheckReturnsFalseWhenValueDoesNotExist()
         {
-            Assert.IsFalse(_board.CheckValueExistsInBoardRow(1, 1, 5));
+            Assert.IsFalse(_board.BoardRowContains(1, 1, 5));
         }
 
         [Test]
         public void ColumnCheckReturnsTrueWhenValueExists()
         {
-            Assert.IsTrue(_board.CheckValueExistsInBoardColumn(0, 0, 6));
+            Assert.IsTrue(_board.BoardColumnContains(0, 0, 6));
         }
 
         [Test]
         public void ColumnCheckReturnsFalseWhenValueDoesNotExist()
         {
-            Assert.IsFalse(_board.CheckValueExistsInBoardColumn(1, 2, 9));
+            Assert.IsFalse(_board.BoardColumnContains(1, 2, 9));
         }
     }
 }

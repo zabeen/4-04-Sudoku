@@ -38,7 +38,13 @@ namespace Sudoku.Tests
         [Test]
         public void EverySquareInBoardRowHasUniqueNumber()
         {
-            
+            // todo
+        }
+
+        [Test]
+        public void EverySquareInBoardColumnHasUniqueNumber()
+        {
+            // todo
         }
     }
 }

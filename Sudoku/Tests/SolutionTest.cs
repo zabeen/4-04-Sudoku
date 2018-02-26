@@ -23,7 +23,7 @@ namespace Sudoku.Tests
         }
 
         [Test]
-        public void EverySquareInBlockHasUniqueNumber()
+        public void EverySquareInEveryBlockHasUniqueNumber()
         {
             for (var row = 0; row < 3; row++)
             {

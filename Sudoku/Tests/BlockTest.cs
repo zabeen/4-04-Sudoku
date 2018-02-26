@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
 using Sudoku.GameLogic;
 
 namespace Sudoku.Tests
@@ -6,7 +8,7 @@ namespace Sudoku.Tests
     [TestFixture]
     public class BlockTest
     {
-        private Block _block;
+        private readonly Block _block;
 
         public BlockTest()
         {
@@ -23,6 +25,13 @@ namespace Sudoku.Tests
         public void SquareCheckReturnsFalseWhenValueDoesNotExist()
         {
             Assert.IsFalse(_block.CheckValueExistsInBlock(9));
+        }
+
+        [Test]
+        public void CorrectValuesReturnedForBlock()
+        {
+            var values = _block.GetValuesInBlock();
+            Assert.IsTrue(values.Distinct().OrderBy(v => v).SequenceEqual(new List<int> { 0, 2, 4 }));
         }
     }
 }

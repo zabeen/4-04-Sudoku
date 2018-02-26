@@ -4,11 +4,11 @@ using Sudoku.GameLogic;
 namespace Sudoku.Tests
 {
     [TestFixture]
-    public class BoardTests
+    public class BoardTest
     {
         private ISudokuBoard _board;
 
-        public BoardTests()
+        public BoardTest()
         {
             _board = new SudokuBoard();
         }

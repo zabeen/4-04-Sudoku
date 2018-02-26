@@ -51,8 +51,8 @@
     <Compile Include="GameLogic\Solution.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\BlockTests.cs" />
-    <Compile Include="Tests\BoardTests.cs" />
+    <Compile Include="Tests\BlockTest.cs" />
+    <Compile Include="Tests\BoardTest.cs" />
     <Compile Include="Tests\CoordinatesTest.cs" />
     <Compile Include="Tests\SolutionTest.cs" />
   </ItemGroup>

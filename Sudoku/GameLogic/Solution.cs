@@ -64,7 +64,7 @@ namespace Sudoku.GameLogic
                     return true;
             }
 
-            ResetSquareToOriginalValue(current);
+            ResetSquareToReferenceValue(current);
             return false;
         }
 
@@ -75,18 +75,22 @@ namespace Sudoku.GameLogic
                 .SetSquareValue(node.Square, value);
         }
 
-        private void ResetSquareToOriginalValue(Node node)
+        private void ResetSquareToReferenceValue(Node node)
         {
-            var originalValue = _referenceCopy
+            var val = GetReferenceValue(node);
+            SetSquareValue(node, val);
+        }
+
+        private int GetReferenceValue(Node node)
+        {
+            return _referenceCopy
                 .GetBlock(node.Block)
                 .GetSquareValue(node.Square);
-
-            SetSquareValue(node, originalValue);
         }
 
         private IEnumerable<int> GetPossibleValues(Node node)
         {
-            var referenceVal = _referenceCopy.GetBlock(node.Block).GetSquareValue(node.Square);
+            var referenceVal = GetReferenceValue(node);
             if (referenceVal > 0)
                 return new List<int> { referenceVal };
 

@@ -48,29 +48,40 @@ namespace Sudoku.GameLogic
             var startingBlock = new Coordinates(0, 0);
             var startingSquare = new Coordinates(0, 0);
 
-            FindValues(new Node(startingBlock, startingSquare));
+            CalculateValuesBySquare(new Node(startingBlock, startingSquare));
         }
 
-        private bool FindValues(Node current, int counter = 0)
+        private bool CalculateValuesBySquare(Node current, int counter = 0)
         {
             if (counter == SquaresTotal)
                 return true;
 
-            var possibleValues = GetPossibleValues(current).ToList();
-            if (possibleValues.Count == 0)
-                return false;
-
-            foreach (var val in possibleValues)
+            foreach (var val in GetPossibleValues(current))
             {
-                _workingCopy.GetBlock(current.Block).SetSquareValue(current.Square, val);
+                SetSquareValue(current, val);
 
-                if (FindValues(current.Next, counter + 1))
+                if (CalculateValuesBySquare(current.Next, counter + 1))
                     return true;
             }
 
-            var originalValue = _referenceCopy.GetBlock(current.Block).GetSquareValue(current.Square);
-            _workingCopy.GetBlock(current.Block).SetSquareValue(current.Square, originalValue);
+            ResetSquareToOriginalValue(current);
             return false;
+        }
+
+        private void SetSquareValue(Node node, int value)
+        {
+            _workingCopy
+                .GetBlock(node.Block)
+                .SetSquareValue(node.Square, value);
+        }
+
+        private void ResetSquareToOriginalValue(Node node)
+        {
+            var originalValue = _referenceCopy
+                .GetBlock(node.Block)
+                .GetSquareValue(node.Square);
+
+            SetSquareValue(node, originalValue);
         }
 
         private IEnumerable<int> GetPossibleValues(Node node)

@@ -5,7 +5,6 @@ namespace Sudoku.GameLogic
 {
     public interface IBoard
     {
-        int BlocksPerSide { get; }
         Block GetBlock(Coordinates blockCoordinates);
         void WriteBoard();
         bool BoardRowContains(int blockRow, int squareRow, int value);
@@ -15,9 +14,9 @@ namespace Sudoku.GameLogic
 
     public class Board : IBoard
     {
-        public int BlocksPerSide { get; } = 3;
-        private Block[,] _board;  
-    
+        private readonly Block[,] _board;
+        private const int BlocksPerSide = 3;
+        
         public Board()
         {
             _board = SetupBoard();

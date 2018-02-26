@@ -45,10 +45,8 @@ namespace Sudoku.GameLogic
 
         public void SolveBoard()
         {
-            var startingBlock = new Coordinates(0, 0);
-            var startingSquare = new Coordinates(0, 0);
-
-            CalculateValuesBySquare(new Node(startingBlock, startingSquare));
+            var starting = new Coordinates(0, 0);
+            CalculateValuesBySquare(new Node(starting, starting));
         }
 
         private bool CalculateValuesBySquare(Node current, int counter = 0)
@@ -66,26 +64,6 @@ namespace Sudoku.GameLogic
 
             ResetSquareToReferenceValue(current);
             return false;
-        }
-
-        private void SetSquareValue(Node node, int value)
-        {
-            _workingCopy
-                .GetBlock(node.Block)
-                .SetSquareValue(node.Square, value);
-        }
-
-        private void ResetSquareToReferenceValue(Node node)
-        {
-            var val = GetReferenceValue(node);
-            SetSquareValue(node, val);
-        }
-
-        private int GetReferenceValue(Node node)
-        {
-            return _referenceCopy
-                .GetBlock(node.Block)
-                .GetSquareValue(node.Square);
         }
 
         private IEnumerable<int> GetPossibleValues(Node node)
@@ -107,6 +85,26 @@ namespace Sudoku.GameLogic
             }
 
             return possible;
+        }
+
+        private void SetSquareValue(Node node, int value)
+        {
+            _workingCopy
+                .GetBlock(node.Block)
+                .SetSquareValue(node.Square, value);
+        }
+
+        private int GetReferenceValue(Node node)
+        {
+            return _referenceCopy
+                .GetBlock(node.Block)
+                .GetSquareValue(node.Square);
+        }
+
+        private void ResetSquareToReferenceValue(Node node)
+        {
+            var val = GetReferenceValue(node);
+            SetSquareValue(node, val);
         }
     }
 }

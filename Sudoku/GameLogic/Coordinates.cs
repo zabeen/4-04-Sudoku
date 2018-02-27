@@ -10,6 +10,7 @@ namespace Sudoku.GameLogic
     {
         public int Row { get; }
         public int Column { get; }
+        public Coordinates Next => NextCoordinates();
 
         private const int MaxIndex = 2;
 
@@ -19,7 +20,7 @@ namespace Sudoku.GameLogic
             Column = col;
         }
 
-        public Coordinates Next()
+        public Coordinates NextCoordinates()
         {
             var col = Column == MaxIndex ? 0 : Column + 1;
             var row = Column == MaxIndex ? Row == MaxIndex ? 0 : Row + 1 : Row;

@@ -24,8 +24,8 @@ namespace Sudoku.GameLogic
 
             public Node NextNode()
             {
-                var square = Square.Next();
-                var block = square.Equals(new Coordinates(0, 0)) ? Block.Next() : Block;
+                var square = Square.Next;
+                var block = square.Equals(new Coordinates(0, 0)) ? Block.Next : Block;
 
                 return new Node(block, square);
             }

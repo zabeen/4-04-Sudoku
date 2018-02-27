@@ -13,7 +13,7 @@ namespace Sudoku.Tests
             const int col = 0;
             const int row = 0;
             var coord = new Coordinates(row, col);
-            var next = coord.Next();
+            var next = coord.Next;
 
             Assert.AreEqual(next, new Coordinates(row, col + 1));
         }
@@ -24,7 +24,7 @@ namespace Sudoku.Tests
             const int col = 2;
             const int row = 1;
             var coord = new Coordinates(row, col);
-            var next = coord.Next();
+            var next = coord.Next;
 
             Assert.AreEqual(next, new Coordinates(row + 1, 0));
         }
@@ -35,7 +35,7 @@ namespace Sudoku.Tests
             const int col = 2;
             const int row = 2;
             var coord = new Coordinates(row, col);
-            var next = coord.Next();
+            var next = coord.Next;
 
             Assert.AreEqual(next, new Coordinates(0, 0));
         }
